@@ -1,22 +1,37 @@
+// Declare initial width/height in squares
+var squareCount = 16;
 
 // Create the container element where the grid will be held
 const container = document.querySelector('#container');
-container.style = "margin: auto auto; display: grid; grid-template-columns: repeat(16, 1fr); grid-gap: 1%";
 
 // Container must not be wider than its height
 var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-container.style.width = viewportHeight*0.94 + 'px';
 
 // Create square element of a grid
 var square = document.createElement('div');
 square.classList.add('square');
 square.style.borderRadius = "10%";
 square.style.backgroundColor = "rgba(0,0,0,0.99)";
+square.style.fontSize = '0px';
 
-// Fill the grid with square elements (container div)
-while(container.childElementCount<16*16){
-    container.appendChild(square.cloneNode(true));
-};
+// Squares are here
+var squares = document.getElementsByClassName('square');
+
+
+// Function that generates the grid
+function generateGrid() {
+    container.style = "margin: auto auto; display: grid; grid-template-columns: repeat(" + squareCount + ", 1fr); grid-gap: " + 16/squareCount +"%";
+    container.style.width = viewportHeight*0.94 + 'px';
+    container.innerHTML = '';
+    while(container.childElementCount<squareCount*squareCount){
+        container.appendChild(square.cloneNode(true));
+    };
+    // Add event listener to every square div to actually call color changing
+    for(var i = 0; i < squares.length; i++){
+        var thisSquare =  squares[i];
+        thisSquare.addEventListener('mouseover', changeColor)
+    }
+}
 
 // Add buttons holder
 var buttonsHolder = document.createElement('div');
@@ -65,10 +80,19 @@ function changeColor() {
     this.style.backgroundColor = newColor;
 }
 
-var squares = document.getElementsByClassName('square');
-
-// Add event listener to every square div to actually call color changing
-for(var i = 0; i < squares.length; i++){
-    var thisSquare =  squares[i];
-    thisSquare.addEventListener('mouseover', changeColor)
+// Create custom grid
+function generateCustomGrid(){
+    squareCount = parseInt(prompt("Select the desired size of the grid","16"));
+    generateGrid();
 }
+
+
+// Add event listener to resetButton to reset the grid
+var resetButtonDOM = document.getElementById('reset-button');
+resetButtonDOM.addEventListener('click', generateGrid);
+
+// Add event listener to generateButton to resize THEN reset the grid
+var generateButtonDOM = document.getElementById('generate-button');
+generateButtonDOM.addEventListener('click', generateCustomGrid);
+
+generateGrid();
