@@ -4,3 +4,25 @@
     display: inline-block;
     vertical-align: top;
   }
+
+body {
+  overflow: hidden;
+}
+
+button {
+  background: linear-gradient(to bottom, #64a100 0%,#019b01 100%); 
+  border: none;
+  border-bottom: 2px solid #224100;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 3px 0px 0px rgba(0,0,0,.2);
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+button:active {
+  background: linear-gradient(to bottom, #497700 0%,#007500 100%); 
+  box-shadow: 0px 3px 1px 1px rgba(0,0,0,.2);
+  top: 1px;
+}
