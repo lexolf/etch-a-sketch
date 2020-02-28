@@ -41,7 +41,7 @@ function generateGrid() {
 var buttonsHolder = document.createElement('div');
 buttonsHolder.style.position = 'fixed';
 buttonsHolder.style.width = '100%';
-buttonsHolder.style.bottom = -viewportHeight*0.035 + 'px';
+buttonsHolder.style.bottom = -viewportHeight*0.07 + 'px';
 buttonsHolder.style.textAlign = 'center';
 container.parentNode.insertBefore(buttonsHolder, container.nextSibling);
 
